@@ -37,6 +37,15 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x "${{ steps.find.outputs.project_dir }}/gradlew"
 
+      - name: Regenerate real gradle-wrapper.jar
+        # The wrapper jar committed to the repo is a placeholder (it was created
+        # without internet access) and doesn't contain real bytecode. Ubuntu
+        # runners ship with Gradle preinstalled in the tools cache, so we use
+        # that to regenerate a working wrapper jar in place, overwriting the
+        # placeholder, before ./gradlew is invoked below.
+        working-directory: ${{ steps.find.outputs.project_dir }}
+        run: gradle wrapper --gradle-version 8.7
+
       - name: Build APK
         working-directory: ${{ steps.find.outputs.project_dir }}
         run: ./gradlew assembleDebug --stacktrace
