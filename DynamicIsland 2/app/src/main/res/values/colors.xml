@@ -1,7 +1,0 @@
-<resources>
-    <color name="black">#FF000000</color>
-    <color name="island_bg">#FF0A0A0A</color>
-    <color name="accent">#FF4C8DFF</color>
-    <color name="surface_dark">#FF121212</color>
-    <color name="on_surface">#FFEFEFEF</color>
-</resources>
